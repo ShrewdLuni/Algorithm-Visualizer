@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { SortingPage } from './pages/sorting/SortingPage.tsx';
+import { SortingPage } from './pages/Sort/SortingPage.tsx';
 
 const router = createBrowserRouter([
   {
