@@ -5,8 +5,10 @@ interface SidebarItemProps {
 
 export const SidebarItem = ({label} : SidebarItemProps) => {
   return (
-    <div>
-      {label}
+    <div className="text-white">
+      <p className="w-max bg-rose-400" draggable>
+        {label}
+      </p>
     </div>
   )
 }
