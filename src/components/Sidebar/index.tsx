@@ -28,14 +28,12 @@ export const Sidebar = () => {
         </div>
         <ChevronDown className=""/>
       </Button>
-      <div className="bg-emerald-600">
-        {activeCategory == "Settings" && (
-          <div className="text-white">
-            <p>Delay:</p>
-            <p>123</p>
-          </div>
-        )}
-      </div>
+      {activeCategory == "Settings" && (
+        <div className="text-white bg-emerald-500">
+          <p>Delay:</p>
+          <p>123</p>
+        </div>
+      )}
       <Button className="flex flex-row items-center justify-between border-2 px-2 py-2 text-white font-semibold" variant="ghost" onClick={() => setActiveCategorie("Algorithms")}>
         <div className="flex flex-row">
           <SquareFunction />
