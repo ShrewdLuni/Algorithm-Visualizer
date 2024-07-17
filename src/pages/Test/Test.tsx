@@ -27,8 +27,8 @@ export const Test = () => {
     connection.start()
       .then(() => {
         console.log('Connected to SignalR hub');
-        connection.invoke('QuickSort', [5,6,7,1,5,4,3,2,9,0])
-          .catch(err => console.error('Error invoking BubbleSort 123', err));
+        connection.invoke('InsertionSort', [5,6,7,1,5,4,3,2,9,0])
+          .catch(err => console.error('Error invoking InsertionSort 123', err));
       })
       .catch(err => console.error('Error connecting to SignalR hub 321', err));
 
