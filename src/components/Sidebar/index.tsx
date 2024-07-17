@@ -20,7 +20,7 @@ export const Sidebar = () => {
   ]
   
   return (
-    <div className="h-screen flex flex-col w-[300px] px-4 py-6 text-left border-emerald-500 border-solid border-r-4 bg-black">
+    <div className="h-screen flex flex-col w-[300px] px-4 py-6 text-left border-emerald-500 border-solid bg-black">
       <CategoryButton label={"Settings"} icon={<Settings/>} onClick={() => setActiveCategorie("Settings")} isActive={activeCategory == "Settings"}/>
       {activeCategory == "Settings" && <SortSettings/>}
 
