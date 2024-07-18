@@ -1,10 +1,9 @@
 import { useState } from "react"
-import { SidebarItem } from "./SidebarItem"
-
 import { Settings, SquareFunction } from "lucide-react"
 
 import { CategoryButton } from "./CategoryButton"
 import { SortSettings } from "./SortSettings"
+import { SortMethods } from "./SortMethods"
 
 export const Sidebar = () => {
 
@@ -25,9 +24,7 @@ export const Sidebar = () => {
       {activeCategory == "Settings" && <SortSettings/>}
 
       <CategoryButton label={"Algorithms"} icon={<SquareFunction/>} onClick={() => setActiveCategorie("Algorithms")} isActive={activeCategory == "Algorithms"}/>
-      {activeCategory == "Algorithms" && (
-        sidebarItems.map(item => <SidebarItem label={item.label}/>)
-      )}
+      {activeCategory == "Algorithms" && <SortMethods methodsList={sidebarItems}/>}
     </div>
   )
 }
