@@ -8,6 +8,7 @@ import { SortMethods } from "./SortMethods"
 export const Sidebar = () => {
 
   const [activeCategory,setActiveCategorie] = useState("Settings")
+  const [activeMethod,setActiveMethod] = useState("BubbleSort")
 
   let sidebarItems =  [
     {label:"BubbleSort"},
@@ -24,7 +25,7 @@ export const Sidebar = () => {
       {activeCategory == "Settings" && <SortSettings/>}
 
       <CategoryButton label={"Algorithms"} icon={<SquareFunction/>} onClick={() => setActiveCategorie("Algorithms")} isActive={activeCategory == "Algorithms"}/>
-      {activeCategory == "Algorithms" && <SortMethods methodsList={sidebarItems}/>}
+      {activeCategory == "Algorithms" && <SortMethods methodsList={sidebarItems} activeMethod={activeMethod} setActive={setActiveMethod}/>}
     </div>
   )
 }

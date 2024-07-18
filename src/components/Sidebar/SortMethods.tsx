@@ -2,12 +2,14 @@ import { SortMethod } from "./Method"
 
 interface SortMethodsProps{
   methodsList : {label: string;}[]
+  activeMethod : string
+  setActive : any
 }
 
-export const SortMethods = ({methodsList} : SortMethodsProps) => {
+export const SortMethods = ({methodsList,activeMethod,setActive} : SortMethodsProps) => {
   return (
-    <div>
-      {methodsList.map((method) => <SortMethod label={method.label}/>)}
+    <div className="flex flex-col gap-y-2 py-2">
+      {methodsList.map((method) => <SortMethod label={method.label} isActive={method.label == activeMethod} setActive={() => setActive(method.label)}/>)}
     </div>
   )
 }
