@@ -7,7 +7,8 @@ import { SortMethods } from "./SortMethods"
 
 export const Sidebar = () => {
 
-  const [activeCategory,setActiveCategorie] = useState("Settings")
+  const [isActiveSettings,setIsActiveSettings] = useState(true)
+  const [isActiveMethods,setIsActiveMethods] = useState(true)
   const [activeMethod,setActiveMethod] = useState("BubbleSort")
 
   let sidebarItems =  [
@@ -21,11 +22,11 @@ export const Sidebar = () => {
   
   return (
     <div className="h-screen flex flex-col w-[300px] px-4 py-6 text-left border-emerald-500 border-solid bg-black">
-      <CategoryButton label={"Settings"} icon={<Settings/>} onClick={() => setActiveCategorie("Settings")} isActive={activeCategory == "Settings"}/>
-      {activeCategory == "Settings" && <SortSettings/>}
+      <CategoryButton label={"Settings"} icon={<Settings/>} onClick={() => setIsActiveSettings(!isActiveSettings)} isActive={isActiveSettings}/>
+      {isActiveSettings && <SortSettings/>}
 
-      <CategoryButton label={"Algorithms"} icon={<SquareFunction/>} onClick={() => setActiveCategorie("Algorithms")} isActive={activeCategory == "Algorithms"}/>
-      {activeCategory == "Algorithms" && <SortMethods methodsList={sidebarItems} activeMethod={activeMethod} setActive={setActiveMethod}/>}
+      <CategoryButton label={"Algorithms"} icon={<SquareFunction/>} onClick={() => setIsActiveMethods(!isActiveMethods)} isActive={isActiveMethods}/>
+      {isActiveMethods && <SortMethods methodsList={sidebarItems} activeMethod={activeMethod} setActive={setActiveMethod}/>}
     </div>
   )
 }
