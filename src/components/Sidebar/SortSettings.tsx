@@ -1,11 +1,16 @@
 import { Slider } from "@/components/ui/slider"
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 
+interface SortSettinsProps{
+  elementsCount : number
+  delay : number
+  setElementsCount : any
+  setDelay : any
+}
 
-export const SortSettings = () => {
-  const [elementsCount,setElementsCount] = useState(100)
-  const [delay,setDelay] = useState(20)
+
+export const SortSettings = ({elementsCount,delay,setElementsCount,setDelay} : SortSettinsProps) => {
+
 
   return (
     <div className="text-white py-6 flex flex-col gap-y-2">
