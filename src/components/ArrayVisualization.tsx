@@ -23,8 +23,8 @@ export const ArrayVisualization = ({array,currentIndex} : ArrayVisualizationProp
 
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full bg-black">
-      <BarChart accessibilityLayer data={data} barCategoryGap={0}>
-        <Bar dataKey="value" >
+      <BarChart accessibilityLayer data={data} barCategoryGap={0} >
+        <Bar dataKey="value" isAnimationActive={false}>
           {data.map((entry, index) => (
             <Cell key={index} fill={index === currentIndex ? 'red' : 'white'} />
           ))}

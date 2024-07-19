@@ -28,9 +28,8 @@ export const SortingPage = () => {
   const [isConnecting, setIsConnecting] = useState<boolean>(false);
 
   const [index,setIndex] = useState(0)
-  const [array,setArray] = useState<number[]>([
-    7,1,2,3,4,5,6
-  ])
+  const [array,setArray] = useState<number[]>([...Array(elementsCount).keys()])
+
 
   useEffect(() => {
     const startConnection = async () => {
@@ -89,13 +88,30 @@ export const SortingPage = () => {
     };
   }, [delay]);
   
-  const invokeSort = () => {
+  const InvokeSort = () => {
     if(!connectionRef.current || !isConnected){
       console.error("Connection is not established");
       return;
     }
 
     connectionRef.current.invoke('InsertionSort',array,delay).catch(err => console.error("Error in invokeSort method",err))
+  }
+
+  const InvokeStop = () => {
+    if(!connectionRef.current || !isConnected){
+      console.error("Connection is not established");
+      return;
+    }
+
+    connectionRef.current.invoke('InsertionSort',array,delay).catch(err => console.error("Error in invokeSort method",err))
+  }
+
+  const InvokeShuffle = () =>{
+    if(!connectionRef.current || !isConnected){
+      console.error("Connection is not established");
+      return;
+    }
+    connectionRef.current.invoke('Shuffle',array,delay).catch(err => console.error("Error in invokeSort method",err))
   }
 
   return (
@@ -110,11 +126,13 @@ export const SortingPage = () => {
         setActiveMethod={setActiveMethod}
 
         elementsCount={elementsCount}
-        setElementsCount={setElementsCount}
+        setElementsCount={(value : number) => {setElementsCount(value);setArray([...Array(value).keys()])}}
         delay={delay}
         setDelay={setDelay}
 
-        onStart={invokeSort}
+        onStart={InvokeSort}
+        onStop={InvokeStop}
+        onShuffle={InvokeShuffle}
       />
       <div className="w-full h-screen flex flex-col text-black bg-black items-center justify-center py-24 px-2">
         <ArrayVisualization array={array != undefined ? array : []} currentIndex={index != undefined ? index : 0}/>
