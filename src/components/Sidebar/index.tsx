@@ -20,15 +20,17 @@ interface SidebarProps{
   delay : number
   setElementsCount : (value: number) => void
   setDelay : (value: number) => void
+
+  onStart : () => void
 }
 
 
-export const Sidebar = ({sidebarItems,isActiveSettings,setIsActiveSettings,isActiveMethods,activeMethod,setIsActiveMethods,setActiveMethod,elementsCount,delay,setElementsCount,setDelay} : SidebarProps) => {
+export const Sidebar = ({sidebarItems,isActiveSettings,setIsActiveSettings,isActiveMethods,activeMethod,setIsActiveMethods,setActiveMethod,elementsCount,delay,setElementsCount,setDelay,onStart} : SidebarProps) => {
 
   return (
     <div className="h-screen flex flex-col w-[300px] px-4 py-6 text-left border-emerald-500 border-solid bg-black">
       <CategoryButton label={"Settings"} icon={<Settings/>} onClick={() => setIsActiveSettings(!isActiveSettings)} isActive={isActiveSettings}/>
-      {isActiveSettings && <SortSettings elementsCount={elementsCount} delay={delay} setElementsCount={setElementsCount} setDelay={setDelay}/>}
+      {isActiveSettings && <SortSettings elementsCount={elementsCount} delay={delay} setElementsCount={setElementsCount} setDelay={setDelay} onStart={onStart}/>}
 
       <CategoryButton label={"Algorithms"} icon={<SquareFunction/>} onClick={() => setIsActiveMethods(!isActiveMethods)} isActive={isActiveMethods}/>
       {isActiveMethods && <SortMethods methodsList={sidebarItems} activeMethod={activeMethod} setActive={setActiveMethod}/>}
