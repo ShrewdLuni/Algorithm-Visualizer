@@ -1,15 +1,11 @@
 import { Sidebar } from "@/components/Sidebar"
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as signalR from '@microsoft/signalr';
 import { TestChart } from '@/components/TestChart';
 
 
 export const SortingPage = () => {
-  const [index,setIndex] = useState()
-  const [array,setArray] = useState<number[]>([
-    7,1,2,3,4,5,6
-  ])
 
   const [isActiveSettings,setIsActiveSettings] = useState(true)
   const [isActiveMethods,setIsActiveMethods] = useState(true)
@@ -26,6 +22,11 @@ export const SortingPage = () => {
 
   const [elementsCount,setElementsCount] = useState(100)
   const [delay,setDelay] = useState(20)
+
+  const [index,setIndex] = useState()
+  const [array,setArray] = useState<number[]>([
+    7,1,2,3,4,5,6
+  ])
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()
@@ -48,16 +49,17 @@ export const SortingPage = () => {
     connection.start()
       .then(() => {
         console.log('Connected to SignalR hub');
-        connection.invoke('MergeSort', array,)
-          .catch(err => console.error('Error invoking InsertionSort 123', err));
+        connection.invoke('MergeSort', array,delay)
+         .catch(err => console.error('Error invoking', err));
       })
-      .catch(err => console.error('Error connecting to SignalR hub 321', err));
+      .catch(err => console.error('Error connecting to SignalR hub', err));
 
     // Cleanup connection on component unmount
     return () => {
       connection.stop().catch(err => console.error('Error disconnecting from SignalR hub', err));
     };
-  }, []);
+  }, [delay]);
+  
   return (
     <div className="flex flex-row">
       <Sidebar 

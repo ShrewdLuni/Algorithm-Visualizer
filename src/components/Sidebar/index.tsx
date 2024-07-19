@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Settings, SquareFunction } from "lucide-react"
 
 import { CategoryButton } from "./CategoryButton"
@@ -8,19 +7,19 @@ import { SortMethods } from "./SortMethods"
 interface SidebarProps{
   sidebarItems: {label: string;}[]
 
-  isActiveSettings : any
-  setIsActiveSettings : any
+  isActiveSettings : boolean
+  setIsActiveSettings : (value: boolean) => void
 
-  isActiveMethods : any
-  setIsActiveMethods : any
+  isActiveMethods : boolean
+  setIsActiveMethods : (value: boolean) => void
 
-  activeMethod : any
-  setActiveMethod : any
+  activeMethod : string
+  setActiveMethod : (value: string) => void
 
   elementsCount : number
   delay : number
-  setElementsCount : any
-  setDelay : any
+  setElementsCount : (value: number) => void
+  setDelay : (value: number) => void
 }
 
 

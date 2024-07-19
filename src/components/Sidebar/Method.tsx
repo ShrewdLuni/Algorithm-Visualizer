@@ -3,9 +3,9 @@ import { Button } from "../ui/button"
 
 interface SortMethodProps {
   label : string
-  icon? : any
+  icon? : JSX.Element
   isActive : boolean
-  setActive : any
+  setActive : () => void
 }
 
 export const SortMethod = ({label,isActive,setActive} : SortMethodProps) => {

@@ -23,7 +23,7 @@ export const TestChart = ({array,currentIndex} : TestChartProps) => {
 
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full bg-black">
-      <BarChart accessibilityLayer data={data}>
+      <BarChart accessibilityLayer data={data} barCategoryGap={0}>
         <Bar dataKey="value" >
           {data.map((entry, index) => (
             <Cell key={index} fill={index === currentIndex ? 'red' : 'white'} />

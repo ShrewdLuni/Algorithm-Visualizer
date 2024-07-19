@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils"
 
 interface CategoryButtonProps{
   label : string
-  onClick : any
-  icon : any
+  onClick : () => void
+  icon : JSX.Element
   isActive : boolean
 }
 
