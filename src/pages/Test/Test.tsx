@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as signalR from '@microsoft/signalr';
-import { TestChart } from '@/components/TestChart';
+import { TestChart } from '@/components/ArrayVisualization';
 
 export const Test = () => {
   const [index,setIndex] = useState()

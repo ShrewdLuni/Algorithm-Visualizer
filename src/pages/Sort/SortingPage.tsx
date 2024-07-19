@@ -1,9 +1,9 @@
-import { Sidebar } from "@/components/Sidebar"
+import * as signalR from '@microsoft/signalr';
 
 import { useEffect, useRef, useState } from 'react';
-import * as signalR from '@microsoft/signalr';
-import { TestChart } from '@/components/TestChart';
 
+import { ArrayVisualization } from '@/components/ArrayVisualization';
+import { Sidebar } from "@/components/Sidebar"
 
 export const SortingPage = () => {
 
@@ -117,7 +117,7 @@ export const SortingPage = () => {
         onStart={invokeSort}
       />
       <div className="w-full h-screen flex flex-col text-black bg-black items-center justify-center py-24 px-2">
-        <TestChart array={array != undefined ? array : []} currentIndex={index != undefined ? index : 0}/>
+        <ArrayVisualization array={array != undefined ? array : []} currentIndex={index != undefined ? index : 0}/>
       </div>
     </div>
   )

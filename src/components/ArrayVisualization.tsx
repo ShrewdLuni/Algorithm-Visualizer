@@ -13,12 +13,12 @@ const chartConfig = {
 
 } satisfies ChartConfig
  
-interface TestChartProps{
+interface ArrayVisualizationProps{
   array : number[]
   currentIndex : number
 }
 
-export const TestChart = ({array,currentIndex} : TestChartProps) => {
+export const ArrayVisualization = ({array,currentIndex} : ArrayVisualizationProps) => {
   const data = useMemo(() => array.map((value, index) => ({ index, value })), [array]);
 
   return (
