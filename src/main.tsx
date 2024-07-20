@@ -4,7 +4,6 @@ import App from './App.tsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { SortingPage } from './pages/Sort/SortingPage.tsx';
-import { Test } from './pages/Test/Test.tsx';
 
 const router = createBrowserRouter([
   {
@@ -14,10 +13,6 @@ const router = createBrowserRouter([
   {
     path: "/sort",
     element: <SortingPage/>,
-  },
-  {
-    path: "/test",
-    element: <Test/>,
   },
 ]);
 

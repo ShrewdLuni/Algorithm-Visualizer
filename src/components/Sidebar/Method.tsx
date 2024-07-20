@@ -10,8 +10,8 @@ interface SortMethodProps {
 
 export const SortMethod = ({label,isActive,setActive} : SortMethodProps) => {
   return (
-    <Button className={cn("w-full text-white text-xl", isActive && "bg-rose-600 text-white")} variant={"ghost"} onClick={setActive}>
-      <p>
+    <Button className={cn("w-full text-white text-xl text-left", isActive && "bg-rose-600 text-white")} variant={"ghost"} onClick={setActive}>
+      <p className="w-full text-left">
         {label}
       </p>
     </Button>

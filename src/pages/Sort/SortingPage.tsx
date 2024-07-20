@@ -14,10 +14,13 @@ export const SortingPage = () => {
   let sidebarItems =  [
     {label:"BubbleSort"},
     {label:"InsertionSort"},
-    {label:"HeapSort"},
     {label:"QuickSort"},
     {label:"MergeSort"},
-    {label:"BucketSort"},
+    {label:"HeapSort"},
+    {label:"RadixSort"},
+    {label:"CocktailSort"},
+    {label:"SelectionSort"},
+    {label:"CountSort"},
   ]
 
   const [elementsCount,setElementsCount] = useState(100)
@@ -94,7 +97,7 @@ export const SortingPage = () => {
       return;
     }
 
-    connectionRef.current.invoke('InsertionSort',array,delay).catch(err => console.error("Error in invokeSort method",err))
+    connectionRef.current.invoke(activeMethod, array, delay).catch(err => console.error(activeMethod,err))
   }
 
   const InvokeStop = () => {
@@ -102,7 +105,7 @@ export const SortingPage = () => {
       console.error("Connection is not established");
       return;
     }
-
+    
     connectionRef.current.invoke('InsertionSort',array,delay).catch(err => console.error("Error in invokeSort method",err))
   }
 
@@ -111,6 +114,7 @@ export const SortingPage = () => {
       console.error("Connection is not established");
       return;
     }
+
     connectionRef.current.invoke('Shuffle',array,delay).catch(err => console.error("Error in invokeSort method",err))
   }
 
@@ -134,9 +138,7 @@ export const SortingPage = () => {
         onStop={InvokeStop}
         onShuffle={InvokeShuffle}
       />
-      <div className="w-full h-screen flex flex-col text-black bg-black items-center justify-center py-24 px-2">
-        <ArrayVisualization array={array != undefined ? array : []} currentIndex={index != undefined ? index : 0}/>
-      </div>
+      <ArrayVisualization array={array != undefined ? array : []} currentIndex={index != undefined ? index : 0}/>
     </div>
   )
 }
