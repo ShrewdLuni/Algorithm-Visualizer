@@ -12,7 +12,7 @@ interface SortSettinsProps{
 }
 
 
-export const SortSettings = ({elementsCount,delay,setElementsCount,setDelay,onStart,onStop,onShuffle} : SortSettinsProps) => {
+export const SortSettings = ({elementsCount, delay, setElementsCount, setDelay, onStart, onStop, onShuffle} : SortSettinsProps) => {
 
   return (
     <div className="text-white py-6 flex flex-col gap-y-2">

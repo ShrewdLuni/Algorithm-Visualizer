@@ -118,27 +118,31 @@ export const SortingPage = () => {
     connectionRef.current.invoke('Shuffle',array,delay).catch(err => console.error("Error in invokeSort method",err))
   }
 
+  const sidebarProps = {
+    sidebarItems,
+    isActiveSettings,
+    setIsActiveSettings,
+    isActiveMethods,
+    setIsActiveMethods,
+    activeMethod,
+    setActiveMethod,
+    elementsCount,
+    setElementsCount: (value: number) => {
+      setElementsCount(value);
+      setArray([...Array(value).keys()]);
+    },
+    delay,
+    setDelay,
+    onStart: InvokeSort,
+    onStop: InvokeStop,
+    onShuffle: InvokeShuffle
+  };
+
+
   return (
     <div className="flex flex-row">
-      <Sidebar 
-        sidebarItems={sidebarItems} 
-        isActiveSettings={isActiveSettings} 
-        setIsActiveSettings={setIsActiveSettings} 
-        isActiveMethods={isActiveMethods} 
-        setIsActiveMethods={setIsActiveMethods} 
-        activeMethod={activeMethod} 
-        setActiveMethod={setActiveMethod}
-
-        elementsCount={elementsCount}
-        setElementsCount={(value : number) => {setElementsCount(value);setArray([...Array(value).keys()])}}
-        delay={delay}
-        setDelay={setDelay}
-
-        onStart={InvokeSort}
-        onStop={InvokeStop}
-        onShuffle={InvokeShuffle}
-      />
-      <ArrayVisualization array={array != undefined ? array : []} currentIndex={index != undefined ? index : 0}/>
+      <Sidebar {...sidebarProps}/>
+      <ArrayVisualization array={array || []} currentIndex={index || 0}/>
     </div>
   )
 }

@@ -6,7 +6,7 @@ interface SortMethodsProps{
   setActive : (value: string) => void
 }
 
-export const SortMethods = ({methodsList,activeMethod,setActive} : SortMethodsProps) => {
+export const SortMethods = ({methodsList ,activeMethod, setActive} : SortMethodsProps) => {
 
   return (
     <div className="flex flex-col gap-y-2 py-2">
