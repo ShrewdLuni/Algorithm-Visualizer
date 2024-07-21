@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import { ArrayVisualization } from '@/components/ArrayVisualization';
 import { Sidebar } from "@/components/Sidebar"
-import { Label } from 'recharts';
 
 export const SortingPage = () => {
 
@@ -85,6 +84,19 @@ export const SortingPage = () => {
     }
   };
 
+  const notifyServerAndStopConnection = async () => {
+    if (!connectionRef.current || !isConnected) return;
+  
+    try {
+      await connectionRef.current.invoke('ClientStopping', 'Client is stopping');
+      console.log('Notified server about stopping');
+    } catch (err) {
+      console.error('Error notifying server about stopping', err);
+    } finally {
+      await stopConnection();
+    }
+  };
+
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -94,7 +106,7 @@ export const SortingPage = () => {
 
     debounceTimeout.current = setTimeout(() => {
       startConnection()
-    }, 500)
+    }, 300)
 
     return () => {
       if (debounceTimeout.current) {
@@ -110,7 +122,7 @@ export const SortingPage = () => {
       return;
     }
 
-    connectionRef.current.invoke(activeMethod, array, delay).catch(err => console.error(activeMethod,err))
+    connectionRef.current.invoke(activeMethod, array, delay).catch(err => {console.error(activeMethod,err)})
   }
 
   const InvokeStop = () => {
@@ -124,10 +136,9 @@ export const SortingPage = () => {
     }
 
     stopConnection();
-
     debounceTimeout.current = setTimeout(() => {
       startConnection();
-    }, 500);
+    }, 100);
   }
 
   const InvokeShuffle = () =>{
@@ -136,7 +147,7 @@ export const SortingPage = () => {
       return;
     }
 
-    connectionRef.current.invoke('Shuffle',array,delay).catch(err => console.error("Error in invokeSort method",err))
+    connectionRef.current.invoke('Shuffle',array,delay).catch(err => console.error("Error in InvokeShuffle method",err))
   }
 
   const sidebarProps = {
@@ -167,4 +178,4 @@ export const SortingPage = () => {
       <ArrayVisualization array={array || []} currentIndex={index || 0}/>
     </div>
   )
-}
+} 

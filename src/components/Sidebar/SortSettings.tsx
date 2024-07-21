@@ -19,11 +19,13 @@ interface SortSettinsProps{
 
 export const SortSettings = ({elementsCount, delay, setElementsCount, setDelay, isConnected, isConnecting, onStart, onStop, onShuffle} : SortSettinsProps) => {
 
+  const text = isConnected ? "Connected" : isConnecting ? "Connecting..." : "Disconnected" 
+
   return (
-    <div className="text-white py-6 flex flex-col gap-y-2">
-      <div className="flex flex-row items-center">
-        <p className="font-semibold text-md lg:text-lg">LIVE:</p>
+    <div className="text-white pb-6 flex flex-col gap-y-2">
+      <div className="flex flex-row items-center gap-x-2 mt-2 mb-4">
         <div className={cn("h-4 w-4 rounded-full bg-rose-600", isConnected && "bg-green-500" , isConnecting && "bg-yellow-400")}></div>
+        <p className="font-semibold text-md lg:text-lg">{text}</p>
       </div>
       <p className="font-semibold">Elements: {elementsCount}</p>
       <Slider value={[elementsCount]} defaultValue={[100]} max={500} step={5} onValueChange={(value) => setElementsCount(value[0])}/>
