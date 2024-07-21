@@ -116,7 +116,16 @@ export const SortingPage = () => {
       console.error("Connection is not established");
       return;
     }
-    connectionRef.current.invoke('Cancel').then(() => console.log("Cancel invoked")).catch(err => console.error("Error in invokeSort method",err))
+    
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    stopConnection();
+
+    debounceTimeout.current = setTimeout(() => {
+      startConnection();
+    }, 500);
   }
 
   const InvokeShuffle = () =>{
