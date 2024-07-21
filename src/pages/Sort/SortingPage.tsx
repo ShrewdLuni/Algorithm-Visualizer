@@ -25,71 +25,70 @@ export const SortingPage = () => {
 
   const [elementsCount,setElementsCount] = useState(100)
   const [delay,setDelay] = useState(20)
-
+  
   const connectionRef = useRef<signalR.HubConnection | null>(null)
+
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [isConnecting, setIsConnecting] = useState<boolean>(false);
 
   const [index,setIndex] = useState(0)
   const [array,setArray] = useState<number[]>([...Array(elementsCount).keys()])
 
+  const startConnection = async () => {
+    if (connectionRef.current || isConnecting) return;
+
+    setIsConnecting(true);
+
+    const connection = new signalR.HubConnectionBuilder()
+      .withUrl('https://localhost:7134/sort', {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets,
+      })
+      .withAutomaticReconnect()
+      .build();
+
+    connection.on('SortStep', (arr, index) => {
+      setIndex(index);
+      setArray(arr);
+    });
+
+    connection.on('SortComplete', () => {
+      console.log('Sorting Complete');
+    });
+
+    try {
+      await connection.start();
+      console.log('Connected to SignalR hub');
+      setIsConnected(true);
+    } catch (err) {
+      console.error('Error connecting to SignalR hub', err);
+    } finally {
+      setIsConnecting(false);
+    }
+
+    connectionRef.current = connection;
+  };
+
+  const stopConnection = async () => {
+    if (isConnecting || !connectionRef.current) return;
+
+    try {
+      await connectionRef.current.stop();
+      console.log('Disconnected from SignalR hub');
+      connectionRef.current = null;
+      setIsConnected(false);
+    } catch (err) {
+      console.error('Error disconnecting from SignalR hub', err);
+    }
+  };
 
   useEffect(() => {
-    const startConnection = async () => {
-      if (connectionRef.current || isConnecting) return;
-
-      setIsConnecting(true);
-
-      const connection = new signalR.HubConnectionBuilder()
-        .withUrl('https://localhost:7134/sort', {
-          skipNegotiation: true,
-          transport: signalR.HttpTransportType.WebSockets,
-        })
-        .withAutomaticReconnect()
-        .build();
-
-      connection.on('SortStep', (arr: number[], index: number) => {
-        setIndex(index);
-        setArray(arr);
-      });
-
-      connection.on('SortComplete', () => {
-        console.log('Sorting Complete');
-      });
-
-      try {
-        await connection.start();
-        console.log('Connected to SignalR hub');
-        setIsConnected(true);
-      } catch (err) {
-        console.error('Error connecting to SignalR hub', err);
-      } finally {
-        setIsConnecting(false);
-      }
-
-      connectionRef.current = connection;
-    };
-
     startConnection();
 
-    // Cleanup connection on component unmount
     return () => {
-      const stopConnection = async () => {
-        if (isConnecting || !connectionRef.current) return;
-
-        try {
-          await connectionRef.current.stop();
-          console.log('Disconnected from SignalR hub');
-          connectionRef.current = null;
-          setIsConnected(false);
-        } catch (err) {
-          console.error('Error disconnecting from SignalR hub', err);
-        }
-      };
-
       stopConnection();
     };
-  }, [delay]);
+  }, [delay, elementsCount]);
   
   const InvokeSort = () => {
     if(!connectionRef.current || !isConnected){
@@ -105,8 +104,7 @@ export const SortingPage = () => {
       console.error("Connection is not established");
       return;
     }
-    
-    connectionRef.current.invoke('InsertionSort',array,delay).catch(err => console.error("Error in invokeSort method",err))
+    connectionRef.current.invoke('Cancel').then(() => console.log("Cancel invoked")).catch(err => console.error("Error in invokeSort method",err))
   }
 
   const InvokeShuffle = () =>{
