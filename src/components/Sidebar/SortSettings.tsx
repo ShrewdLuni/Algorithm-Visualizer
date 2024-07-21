@@ -1,23 +1,32 @@
 import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 interface SortSettinsProps{
   elementsCount : number
   delay : number
   setElementsCount : (value : number) => void
   setDelay : (value : number) => void
+
+  isConnected : boolean
+  isConnecting : boolean
+
   onStart : () => void
   onStop : () => void
   onShuffle : () => void
 }
 
 
-export const SortSettings = ({elementsCount, delay, setElementsCount, setDelay, onStart, onStop, onShuffle} : SortSettinsProps) => {
+export const SortSettings = ({elementsCount, delay, setElementsCount, setDelay, isConnected, isConnecting, onStart, onStop, onShuffle} : SortSettinsProps) => {
 
   return (
     <div className="text-white py-6 flex flex-col gap-y-2">
+      <div className="flex flex-row items-center">
+        <p className="font-semibold text-lg">LIVE:</p>
+        <div className={cn("h-4 w-4 rounded-full bg-rose-600", isConnected && "bg-green-500" , isConnecting && "bg-yellow-400")}></div>
+      </div>
       <p className="font-semibold">Elements: {elementsCount}</p>
-      <Slider value={[elementsCount]} defaultValue={[100]} max={2048} step={5} onValueChange={(value) => setElementsCount(value[0])}/>
+      <Slider value={[elementsCount]} defaultValue={[100]} max={500} step={5} onValueChange={(value) => setElementsCount(value[0])}/>
       <p className="font-semibold">Delay: {delay}ms</p>
       <Slider value={[delay]} defaultValue={[0]} max={200} step={1} onValueChange={(value) => setDelay(value[0])}/>
       <div className="flex flex-row justify-between w-full mt-2">

@@ -52,6 +52,7 @@ export const SortingPage = () => {
       setArray(arr);
     });
 
+
     connection.on('SortComplete', () => {
       console.log('Sorting Complete');
     });
@@ -82,10 +83,21 @@ export const SortingPage = () => {
     }
   };
 
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
-    startConnection();
+    if(debounceTimeout.current){
+      clearTimeout(debounceTimeout.current)
+    }
+
+    debounceTimeout.current = setTimeout(() => {
+      startConnection()
+    }, 500)
 
     return () => {
+      if (debounceTimeout.current) {
+        clearTimeout(debounceTimeout.current);
+      }
       stopConnection();
     };
   }, [delay, elementsCount]);
@@ -131,11 +143,12 @@ export const SortingPage = () => {
     },
     delay,
     setDelay,
+    isConnected,
+    isConnecting,
     onStart: InvokeSort,
     onStop: InvokeStop,
     onShuffle: InvokeShuffle
   };
-
 
   return (
     <div className="flex flex-row">
