@@ -22,7 +22,7 @@ export const ArrayVisualization = ({array, currentIndex} : ArrayVisualizationPro
   const data = useMemo(() => array.map((value, index) => ({ index, value })), [array]);
 
   return (
-    <div className="w-full h-screen flex flex-col text-black bg-black items-center justify-center py-24 px-2">
+    <div className="w-full h-screen flex flex-col text-black bg-black items-center justify-center py-24 px-2 overflow-x-scroll">
       <ChartContainer config={chartConfig} className="min-h-[200px] w-full bg-black">
         <BarChart accessibilityLayer data={data} barCategoryGap={-2} >
           <Bar dataKey="value" isAnimationActive={false}>

@@ -22,7 +22,7 @@ export const SortSettings = ({elementsCount, delay, setElementsCount, setDelay, 
   return (
     <div className="text-white py-6 flex flex-col gap-y-2">
       <div className="flex flex-row items-center">
-        <p className="font-semibold text-lg">LIVE:</p>
+        <p className="font-semibold text-md lg:text-lg">LIVE:</p>
         <div className={cn("h-4 w-4 rounded-full bg-rose-600", isConnected && "bg-green-500" , isConnecting && "bg-yellow-400")}></div>
       </div>
       <p className="font-semibold">Elements: {elementsCount}</p>
@@ -30,10 +30,10 @@ export const SortSettings = ({elementsCount, delay, setElementsCount, setDelay, 
       <p className="font-semibold">Delay: {delay}ms</p>
       <Slider value={[delay]} defaultValue={[0]} max={200} step={1} onValueChange={(value) => setDelay(value[0])}/>
       <div className="flex flex-row justify-between w-full mt-2">
-        <Button className="w-[47%] border-rose-600 border-2 bg-rose-600 text-lg  hover:text-xl hover:bg-black transition-all" onClick={onStart}>Start</Button>
-        <Button className="w-[47%] border-rose-600 border-2 bg-rose-600 text-lg  hover:text-xl hover:bg-black transition-all" onClick={onStop}>Stop</Button>
+        <Button className="w-[47%] border-rose-600 border-2 bg-rose-600 text-md lg:text-lg  hover:text-lg lg:hover:text-xl hover:bg-black transition-all" onClick={onStart}>Start</Button>
+        <Button className="w-[47%] border-rose-600 border-2 bg-rose-600 text-md lg:text-lg  hover:text-lg lg:hover:text-xl hover:bg-black transition-all" onClick={onStop}>Stop</Button>
       </div>
-      <Button className="border-rose-600 border-2 bg-rose-600 text-lg hover:text-xl hover:text-white transition-all" onClick={onShuffle}>Shuffle</Button>
+      <Button className="border-rose-600 border-2 bg-rose-600 text-md lg:text-lg hover:text-lg lg:hover:text-xl hover:text-white transition-all" onClick={onShuffle}>Shuffle</Button>
     </div>
   )
 }

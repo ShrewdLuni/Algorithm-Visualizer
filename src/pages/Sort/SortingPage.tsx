@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { ArrayVisualization } from '@/components/ArrayVisualization';
 import { Sidebar } from "@/components/Sidebar"
+import { Label } from 'recharts';
 
 export const SortingPage = () => {
 
@@ -21,6 +22,7 @@ export const SortingPage = () => {
     {label:"CocktailSort"},
     {label:"SelectionSort"},
     {label:"CountSort"},
+    {label:"BogoSort"}
   ]
 
   const [elementsCount,setElementsCount] = useState(100)
@@ -116,7 +118,7 @@ export const SortingPage = () => {
       console.error("Connection is not established");
       return;
     }
-    
+
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
     }
