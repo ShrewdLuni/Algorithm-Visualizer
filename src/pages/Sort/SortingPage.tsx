@@ -106,7 +106,7 @@ export const SortingPage = () => {
 
     debounceTimeout.current = setTimeout(() => {
       startConnection()
-    }, 300)
+    }, 200)
 
     return () => {
       if (debounceTimeout.current) {
