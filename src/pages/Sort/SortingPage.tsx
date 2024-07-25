@@ -138,7 +138,7 @@ export const SortingPage = () => {
     stopConnection();
     debounceTimeout.current = setTimeout(() => {
       startConnection();
-    }, 100);
+    }, 200);
   }
 
   const InvokeShuffle = () =>{
