@@ -84,19 +84,6 @@ export const SortingPage = () => {
     }
   };
 
-  const notifyServerAndStopConnection = async () => {
-    if (!connectionRef.current || !isConnected) return;
-  
-    try {
-      await connectionRef.current.invoke('ClientStopping', 'Client is stopping');
-      console.log('Notified server about stopping');
-    } catch (err) {
-      console.error('Error notifying server about stopping', err);
-    } finally {
-      await stopConnection();
-    }
-  };
-
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
