@@ -34,10 +34,10 @@ export const Sidebar = ({sidebarItems, isActiveSettings, setIsActiveSettings, is
 
   return (
     <div className="h-screen flex flex-col gap-y-2 w-[300px] px-4 py-6 text-left border-emerald-500 border-solid bg-black overflow-y-scroll">
-      <CategoryButton label={"Settings"} icon={<Settings/>} onClick={() => setIsActiveSettings(!isActiveSettings)} isActive={isActiveSettings}/>
+      <CategoryButton label={"Settings"} icon={<Settings/>} onClick={() => setIsActiveSettings(!isActiveSettings)}/>
       {isActiveSettings && <SortSettings elementsCount={elementsCount} delay={delay} setElementsCount={setElementsCount} setDelay={setDelay} isConnected={isConnected} isConnecting={isConnecting}  onStart={onStart} onStop={onStop} onShuffle={onShuffle}/>}
 
-      <CategoryButton label={"Algorithms"} icon={<SquareFunction/>} onClick={() => setIsActiveMethods(!isActiveMethods)} isActive={isActiveMethods}/>
+      <CategoryButton label={"Algorithms"} icon={<SquareFunction/>} onClick={() => setIsActiveMethods(!isActiveMethods)}/>
       {isActiveMethods && <SortMethods methodsList={sidebarItems} activeMethod={activeMethod} setActive={setActiveMethod}/>}
     </div>
   )

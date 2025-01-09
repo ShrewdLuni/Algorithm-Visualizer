@@ -11,7 +11,7 @@ export const SortingPage = () => {
   const [isActiveMethods,setIsActiveMethods] = useState(true)
   const [activeMethod,setActiveMethod] = useState("BubbleSort")
 
-  let sidebarItems =  [
+  const sidebarItems =  [
     {label:"BubbleSort"},
     {label:"InsertionSort"},
     {label:"QuickSort"},
